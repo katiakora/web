@@ -31,7 +31,7 @@ section { margin-bottom: 80px; padding: 0; }
 .header__link__frame { color: #fff; background: #156963; padding: 9px 24px; text-align: center; } 
 
 .intro { overflow: hidden; margin-bottom: 80px; background-image: url(../images/intro.jpg); background-position: 0 50%; background-repeat: no-repeat; background-size: 50% auto; }
-.intro .row { min-height: 600px; }
+.intro__row { min-height: 600px; }
 .intro__head { margin: 0 0 24px 0; }
 .intro__cont { flex-basis: 50%; max-width: 45%; margin-left: auto; }
 .intro__img { width: 100%; }
@@ -85,4 +85,48 @@ section { margin-bottom: 80px; padding: 0; }
 .email { display: block; }
 .email__inp { display: block; width: calc(100% - 26px); font-family: 'Montserrat', sans-serif; font-style: normal; font-weight: 400; font-size: 0.75rem; line-height: 2rem; border: 1px solid #F2F2F2; border-radius: 2px; padding: 0 13px; margin: 0 0 14px 0; }
 .email__sbm { font-size: 0.8rem; padding: 4px 8px; }
+
+
+@media (max-width:1279px) {
+
+	.wrapper { padding: 0 32px; }
+	
+	.row { flex-wrap: wrap; }
+
+	.services__item { flex-basis: 40%; }
+	.featured__item { flex-basis: 30%; }
+
+	.footer__row { gap: 32px; }
+	.footer .col-2-5 { flex-basis: 100%; }
+	.footer .col-1-5 { flex-basis: 30%; }
+
+	.cta__row { flex-wrap: nowrap; }
+	.cta__block { width: auto; margin: 0; padding: 32px; }
+	.cta__img { flex-basis: 30%; }
+
+}
+
+@media (max-width:767px) {
+
+	h1 { font-size: 3.45rem; }
+
+	.wrapper { padding: 0 16px; }
+
+	.header { position: static; padding: 24px 0; }
+	.intro { background-size: 100% auto; background-position: top center; }
+	.intro__row { height: auto; min-height: 0; }
+	.intro__cont { margin: 300px 0 0 0; flex-basis: 100%; max-width: none; background: #fff; padding: 16px; }
+
+	.services__item { flex-basis: 100%; }
+	.featured__item { flex-basis: 40%; }
+
+	.info__row { flex-direction: column-reverse; gap: 32px; }
+	.info__cont, .info__img { max-width: 100%; }
+
+	.cta__row { flex-wrap: wrap; }
+	.cta__img { max-width: 100%; margin: 0 auto; }
+
+	.footer .col-2-5 { flex-basis: 100%; }
+	.footer .col-1-5 { flex-basis: 40%; }
+}
 
