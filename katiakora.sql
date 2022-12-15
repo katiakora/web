@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `katiakora`
 --
+CREATE DATABASE IF NOT EXISTS `katiakora` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `katiakora`;
 
 -- --------------------------------------------------------
 
