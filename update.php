@@ -1,21 +1,20 @@
 <?php include('template/head.php'); ?>
+<?php include('database.php'); ?>
 
 			<section class="product" >
 				<div class="wrapper" >
 					<?php 
 						$product = false;
 						if(isset($_GET)&&isset($_GET['id'])) {
-							$xml = simplexml_load_file('database.xml');
-							$product = $xml->xpath('//item[./id='.$_GET['id'].']')[0];
+							$result = $db->prepare("SELECT * FROM products where id = ?");
+							$result->execute([$_GET['id']]);
+							$product = $result->fetch(PDO::FETCH_LAZY);
 						} else {}
 
 						if($product == false) 
 							header('location: index.php');
 
 						if(isset($_POST)&&is_array($_POST)&&isset($_POST['title'])&&$product->id>0) {
-							$product->title = $_POST['title'];
-							$product->price = $_POST['price'];
-							$product->description = $_POST['description'];
 
 							$rec = true;
 							if(!is_string($_POST['title'])||strlen($_POST['title'])<3) {
@@ -34,8 +33,13 @@
 							} else {}
 
 							if($rec) {
-
-								$xml->asXML('database.xml');
+								$result = $db->prepare("update products set title = ?, price = ?, description = ? where id = ? ");
+								$result->execute([
+									$_POST['title'],
+									$_POST['price'],
+									$_POST['description'],
+									$product->id
+								]);
 								header('location: index.php?id='.$product->id);
 							} else {}
 						} else {}

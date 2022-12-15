@@ -1,4 +1,5 @@
 <?php include('template/head.php'); ?>
+<?php include('database.php'); ?>
 
 			<section class="product" >
 				<div class="wrapper" >
@@ -26,17 +27,12 @@
 							} else {}
 
 							if($rec) {
-								$xml = simplexml_load_file('database.xml');
-								$product->id = $xml->attributes()->max + 1;
-								
-								$item = $xml->addChild('item');
-								$item->addChild('id', $product->id);
-								$item->addChild('title', $product->title);
-								$item->addChild('price', $product->price);
-								$item->addChild('description', $product->description);
-
-								$xml->attributes()->max = $product->id;
-								$xml->asXML('database.xml');
+								$result = $db->prepare("INSERT INTO products (title,price,description) values (?,?,?)");
+								$result->execute([
+									$_POST['title'],
+									$_POST['price'],
+									$_POST['description']
+								]);
 								header('location: index.php?id='.$product->id);
 							} else {}
 						} else {}

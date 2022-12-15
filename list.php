@@ -1,10 +1,12 @@
 <?php include('template/head.php'); ?>
+<?php include('database.php'); ?>
 
 			<section class="products" >
 				<div class="wrapper row products__row" >
 					<?php
-						$xml = simplexml_load_file('database.xml');
-						foreach($xml->item as $o) {
+						$result = $db->prepare("SELECT * FROM products");
+						$result->execute();
+						while ($o = $result->fetch(PDO::FETCH_LAZY)) {
 						?>
 							<a href="index.php?id=<?php echo $o->id ?>" class="products__item plant" >
 								<h4 class="plant__head" ><?php echo $o->title ?></h4>

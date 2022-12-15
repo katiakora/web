@@ -1,37 +1,22 @@
 <?php include('template/head.php'); ?>
+<?php include('database.php'); ?>
 
 			<section class="product" >
 				<div class="wrapper" >
 					<?php 
 						$product = false;
 						if(isset($_GET)&&isset($_GET['id'])) {
-							$xml = simplexml_load_file('database.xml');
-							$product = $xml->xpath('//item[./id='.$_GET['id'].']')[0];
+							$result = $db->prepare("SELECT * FROM products where id = ?");
+							$result->execute([$_GET['id']]);
+							$product = $result->fetch(PDO::FETCH_LAZY);
 						} else {}
 
 						if($product == false) 
 							header('location: index.php');
 
 						if(isset($_POST)&&is_array($_POST)&&isset($_POST['id'])&&$product) {
-							$i = 0;
-							foreach($xml->item as $item) {
-								if($item->id == $_POST['id']) {
-									unset($xml->item[$i]);
-									break;
-								} else {}
-								$i++;
-							}
-
-							$max = 0;
-							foreach($xml->item as $item) {
-								print($max.' '.$item->id.' <br/>');
-								if($max < (integer) $item->id) {
-									$max = $item->id;
-								} else {}
-							}
-							$xml->attributes()->max = $max;
-
-							$xml->asXML('database.xml');
+							$result = $db->prepare("delete from products where id = ?");
+							$result->execute([$_POST['id']]);
 							header('location: index.php');
 						} else {}
 					?>
