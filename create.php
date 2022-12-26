@@ -1,6 +1,5 @@
-<?php include('template/head.php'); ?>
 <?php include('database.php'); ?>
-
+			
 			<section class="product" >
 				<div class="wrapper" >
 					<?php 
@@ -33,7 +32,7 @@
 									$_POST['price'],
 									$_POST['description']
 								]);
-								header('location: index.php?id='.$product->id);
+								header('location: list.php?id='.$product->id);
 							} else {}
 						} else {}
 
@@ -41,5 +40,3 @@
 					?>
 				</div>
 			</section>
-
-<?php include('template/foot.php'); ?>

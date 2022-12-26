@@ -1,7 +1,6 @@
-<?php include('template/head.php'); ?>
 <?php include('database.php'); ?>
 
-			<section class="product" >
+	<section class="product" >
 				<div class="wrapper" >
 					<?php 
 						$product = false;
@@ -12,7 +11,7 @@
 						} else {}
 
 						if($product == false) 
-							header('location: index.php');
+							header('location: list.php');
 
 						if(isset($_POST)&&is_array($_POST)&&isset($_POST['title'])&&$product->id>0) {
 
@@ -40,7 +39,7 @@
 									$_POST['description'],
 									$product->id
 								]);
-								header('location: index.php?id='.$product->id);
+								header('location: list.php?id='.$product->id);
 							} else {}
 						} else {}
 
@@ -48,5 +47,3 @@
 					?>
 				</div>
 			</section>
-
-<?php include('template/foot.php'); ?>
